@@ -1,0 +1,42 @@
+type Values = Char 
+type Row a = [a]
+type Matrix a = [Row a] 
+type Grid = Matrix Values
+
+easy :: Grid 
+easy = ["2....1.38","........5",".7...6..."]
+
+--Empty Grid 
+
+blank :: Grid 
+blank = replicate 9 (replicate 9 '.') 
+
+-- Encoding the rules to be satisfied by a solution to a sudoku grid 
+
+{- 
+There must only be one instance of a given number between 1 and 9 in each column in the sudoku grid. 
+There must only be one instance of a given number between 1 and 9 in each row in the sudoku grid. 
+There must only be one instance of a given number between 1 and 9 in each 3 x 3 square withing the grid. 
+-} 
+
+rows :: Matrix a -> [Row a] 
+rows ma = ma 
+
+-- Alternate way of defining rows would be to use the identity function ('id') in Haskell. This would be listed as a topic of new learning. 
+
+rows1 :: Matrix a -> [Row a]
+rows1 = id 
+
+-- Property to be noted : rows (rows ma) = ma 
+-- Extracting the columns from the matrix is essentially equivalent to computing the transpose of the matrix. 
+
+cols :: Matrix a -> [Row a] 
+cols ([]:xs) = [] 
+cols [] = [] 
+cols xs = [map (head) xs] ++ cols (map (tail) xs) 
+
+-- Property to be noted : cols (cols ma) = ma 
+-- (AT)T = A . Transpose of a transpose returns the original matrix. 
+
+boxes :: Matrix a -> [Row a] 
+

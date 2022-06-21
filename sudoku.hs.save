@@ -1,0 +1,24 @@
+type Row a = [a]
+type Matrix a = [Row a]
+type Digit = Char
+type Grid = Matrix Digit 
+
+digits :: [Char]
+digits = ['1'..'9']
+
+blank :: Digit -> Bool 
+blank a = ( a == '0')  -- Establishes that cells which have '0' as a character are expected to be an empty space in the sudoku.   
+
+-- Preconditions : The grid input by the use rmust not have any repetitions because that would make the grid invalid and hence no solution would exist. 
+
+-- Two possible solution methodologies : List all solutions for a sudoku and filter out the ones which have similar structures to the one in the input grid 
+-- Another solution : Fill out the grid in all possible ways and then filter out the ones which act as a good solution. 
+
+
+{- Specification for the solve function in Haskell -} 
+
+solve :: Grid -> [Grid] 
+solve = filter (valid) completions
+
+
+

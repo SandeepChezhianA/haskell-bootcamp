@@ -1,0 +1,15 @@
+type String1 = [Char]
+-- Type synonym where you basically can interchange between using two types. For example, one may choose to use String1 or String or [Char] to represent a sequence of characters in double quotes. 
+
+
+type Position = (Int, Int)
+type Board = [Position]
+
+type Associa k v = [(k,v)] 
+
+findi :: Eq k => k -> Associa k v -> (k,v)
+findi k xs = if fst(head xs) == k then head xs else findi k (tail xs)
+  
+
+data Bool1 = True1 | False1 
+
